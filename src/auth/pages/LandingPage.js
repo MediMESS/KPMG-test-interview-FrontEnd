@@ -35,8 +35,8 @@ const LandingPage = () => {
                   <a href="#">
                     <span className="sr-only">Workflow</span>
                     <img
-                      className="h-8 w-auto sm:h-10"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                      className="h-8 w-auto bg-indigo-100 sm:h-10 hover:bg-indigo-300"
+                      src="./logo.png"
                     />
                   </a>
                   <div className="-mr-2 flex items-center md:hidden">
@@ -121,7 +121,8 @@ const LandingPage = () => {
                 <div>
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    // src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    src="./logo.png"
                     alt=""
                   />
                 </div>
