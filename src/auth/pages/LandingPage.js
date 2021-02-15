@@ -1,28 +1,25 @@
 import React, { Component } from "react";
-import Landing from "./Landing";
+import Produit from "./Produit";
+import Login from "./Login";
 
 class LandingPage extends Component {
   state = {
-    tab: 0,
-    tabs: ["Produit", "Compagnie", "Connection"],
+    current_tab: 0,
+    tabs: ["Produit", "Connection"],
+    tabsImages: ["produit.jpeg", "compagnie.jpg"],
+  };
+
+  setLoginTab = () => {
+    this.setState({ current_tab: 1 });
   };
 
   render() {
     return (
-      <div className="relative bg-white overflow-hidden h-screen">
-        <div className="max-w-full mx-auto">
-          <div
-            className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full 
-        3xl:max-w-3xl
-        3xl:w-full
-        3xl:h-screen
-        lg:pb-28 xl:pb-32"
-          >
+      <div className="relative h-screen bg-white overflow-hidden">
+        <div className="h-screen max-w-7xl mx-auto">
+          <div className="h-screen relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <svg
-              className="hidden lg:block 
-            absolute
-            3xl:block 
-            right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
+              className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
               fill="currentColor"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
@@ -30,7 +27,6 @@ class LandingPage extends Component {
             >
               <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
-
             <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
               <nav
                 className="relative flex items-center justify-between sm:h-10 lg:justify-start"
@@ -38,13 +34,13 @@ class LandingPage extends Component {
               >
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                   <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
+                    <button className="focus:border-none focus:outline-none border-indigo-100">
                       <span className="sr-only">Workflow</span>
                       <img
                         className="h-8 w-auto bg-indigo-100 sm:h-10 hover:bg-indigo-300"
                         src="./logo.png"
                       />
-                    </a>
+                    </button>
                     <div className="-mr-2 flex items-center md:hidden">
                       <button
                         type="button"
@@ -63,9 +59,9 @@ class LandingPage extends Component {
                           aria-hidden="true"
                         >
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M4 6h16M4 12h16M4 18h16"
                           />
                         </svg>
@@ -75,18 +71,17 @@ class LandingPage extends Component {
                 </div>
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                   {this.state.tabs.map((t, i) => (
-                    <a
+                    <button
                       key={i}
-                      href="#"
-                      onClick={() => this.setState({ tab: i })}
+                      onClick={() => this.setState({ current_tab: i })}
                       className={`${
-                        this.state.tab === i
-                          ? "text-indigo-600 hover:text-indigo-500"
+                        this.state.current_tab === i
+                          ? "focus:outline-none focus:border-none text-indigo-600 hover:text-indigo-500"
                           : "text-gray-500 hover:text-gray-900"
                       } font-medium `}
                     >
                       {this.state.tabs[i]}
-                    </a>
+                    </button>
                   ))}
                 </div>
               </nav>
@@ -128,9 +123,9 @@ class LandingPage extends Component {
                         aria-hidden="true"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
@@ -188,17 +183,29 @@ class LandingPage extends Component {
               </div>
             </div>
 
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <Landing />
+            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-24 lg:mt-32 lg:px-8 xl:mt-28">
+              {this.state.current_tab === 0 ? (
+                <Produit setLoginTab={this.setLoginTab} />
+              ) : (
+                <Login />
+              )}
             </main>
           </div>
         </div>
-        <div className="xl:absolute xl:inset-y-0 xl:w-1/2 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img
-            className="w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt=""
-          />
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          {this.state.current_tab === 0 ? (
+            <img
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              src="./landing-page/produit.jpeg"
+              alt=""
+            />
+          ) : (
+            <img
+              className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+              src="./landing-page/compagnie.jpg"
+              alt=""
+            />
+          )}
         </div>
       </div>
     );
