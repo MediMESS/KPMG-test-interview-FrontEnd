@@ -1,11 +1,13 @@
-import { BrowseRouter as Router, route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
+import Login from "./auth/pages/Login";
 
 function App() {
   return (
-    <div>
-      <h1>Welcome</h1>
-    </div>
+    <Switch>
+      <Route path="/" exact component={Login} />
+      <Redirect to="/" />
+    </Switch>
   );
 }
 
