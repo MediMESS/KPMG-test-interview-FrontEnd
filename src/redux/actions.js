@@ -1,10 +1,17 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export const login = () => {
-  localStorage.setItem("token");
-  localStorage.setItem("user");
-  return { type: LOGIN };
+const actionLogin = (params) => {
+  return { type: LOGIN, user: params.user, token: params.token };
+};
+export const rememberMeLogin = (params) => {
+  localStorage.setItem("token", JSON.stringify(params.token));
+  localStorage.setItem("user", JSON.stringify(params.user));
+  return actionLogin(params);
+};
+
+export const simpleLogin = (params) => {
+  return actionLogin(params);
 };
 
 export const logout = () => {
