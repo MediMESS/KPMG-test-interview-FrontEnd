@@ -1,10 +1,7 @@
 import { laravelHeaders, authHeaders } from "./util";
 import { API_URL } from "./config";
 
-const AUTH_URL =
-  process.env.NODE_ENV == "production"
-    ? process.env.SERVER_URL
-    : `${API_URL}/api/auth`;
+const AUTH_URL = `${API_URL}/api/auth`;
 
 const loginUser = (data) => {
   console.log(AUTH_URL);
