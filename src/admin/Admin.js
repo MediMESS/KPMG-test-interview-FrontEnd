@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Maps from "./pages/Maps";
 import Settings from "./pages/Settings";
 import Tables from "./pages/Tables";
+import Users from "./pages/CardUsers";
 import "../assets/styles/tailwind.css";
 
 export default function Admin() {
@@ -30,6 +31,7 @@ export default function Admin() {
             <Route path="/maps" exact component={Maps} />
             <Route path="/settings" exact component={Settings} />
             <Route path="/tables" exact component={Tables} />
+            <Route path="/users" exact component={Users} />
             <Redirect to="/" />
           </Switch>
           <FooterAdmin />
