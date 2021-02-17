@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import accountService from "../../services/account-services";
 
 import { simpleLogin, rememberMeLogin } from "../../redux/actions";
 
@@ -21,7 +22,10 @@ class Login extends Component {
 
   onConnection = (values) => {
     const { remember_me, ...user } = values;
-    this.props.onSignIn({ remember_me, user, token: "token" });
+    accountService.loginUser(values).then((data) => {
+      console.log(data);
+      this.props.onSignIn({ remember_me, user, token: "token" });
+    });
   };
   render() {
     return (
