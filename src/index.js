@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.css";
+import "tailwindcss/tailwind.css";
+
 import App from "./App";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";

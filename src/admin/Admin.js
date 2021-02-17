@@ -14,10 +14,11 @@ import Dashboard from "./pages/Dashboard";
 import Maps from "./pages/Maps";
 import Settings from "./pages/Settings";
 import Tables from "./pages/Tables";
+import "../assets/styles/tailwind.css";
 
 export default function Admin() {
   return (
-    <div>
+    <div id="admin">
       <Sidebar />
       <div className="relative md:ml-64 bg-gray-200">
         <AdminNavbar />
