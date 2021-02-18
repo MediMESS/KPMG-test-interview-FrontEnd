@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import accountService from "../../services/account-services";
+import Toasteo from "toasteo";
 
 import { simpleLogin, rememberMeLogin } from "../../redux/actions";
 
@@ -21,12 +22,33 @@ class Login extends Component {
   }
 
   onConnection = (values) => {
+    window.Toasteo = new Toasteo();
+    window.Toasteo.info("Connection en cours ...");
     const { remember_me, ...user } = values;
-    accountService.loginUser(values).then((data) => {
-      console.log(data);
-      this.props.onSignIn({ remember_me, user, token: "token" });
-    });
+    accountService
+      .loginUser(values)
+      .then((data) => {
+        console.log(data);
+        window.Toasteo.close();
+        if (data.ok) {
+          window.Toasteo.success("Connection réussi");
+          this.props.onSignIn({
+            remember_me,
+            user: data.user,
+            token: data.access_token,
+          });
+        } else {
+          window.Toasteo.duration = 1000;
+          window.Toasteo.error("Erreur connection, vérifiez vos identifiants");
+        }
+      })
+      .catch((e) => {
+        window.Toasteo.error(
+          "Erreur connection, Veuillez réessayer ultérieurement"
+        );
+      });
   };
+
   render() {
     return (
       <div className="flex items-center justify-center  px-4 sm:px-6 lg:px-8">

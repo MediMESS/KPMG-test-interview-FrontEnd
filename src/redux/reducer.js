@@ -16,6 +16,7 @@ const Reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
+        token: action.token,
         is_connecte: true,
       };
     default:

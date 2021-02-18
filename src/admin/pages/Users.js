@@ -10,11 +10,13 @@ class Users extends Component {
     super(props);
     this.state = {
       showForm: false,
+      createdUser: {},
+      email_notif: false,
     };
   }
 
-  setForm = () => {
-    this.setState({ showForm: true });
+  setForm = (status) => {
+    this.setState({ showForm: status });
   };
   render() {
     return (
@@ -23,7 +25,10 @@ class Users extends Component {
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="z-10 h-8">
-                <AddUserBtn onClick={this.setForm} />
+                <AddUserBtn
+                  showForm={this.state.showForm}
+                  onClick={this.setForm}
+                />
               </div>
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <TableUsers />
@@ -38,7 +43,7 @@ class Users extends Component {
             <h1 className="text-xl text-white font-bold text-center mb-5 bg-blue-400">
               Nouvel Utilisateur
             </h1>
-            <AddUser />
+            <AddUser closeForm={() => this.setForm(false)} />
           </div>
         )}
       </div>

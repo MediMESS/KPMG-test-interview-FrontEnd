@@ -903,7 +903,7 @@
 
 #admin .invalid-input,
 #admin .invalid-input:focus {
-  border-color: #f56565;
+  border-color: #f56565 !important;
 }
 
 #admin .form-checkbox:focus {
