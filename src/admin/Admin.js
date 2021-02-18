@@ -14,7 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Maps from "./pages/Maps";
 import Settings from "./pages/Settings";
 import Tables from "./pages/Tables";
-import Users from "./pages/CardUsers";
+import Users from "./pages/Users";
 import "../assets/styles/tailwind.css";
 
 export default function Admin() {
