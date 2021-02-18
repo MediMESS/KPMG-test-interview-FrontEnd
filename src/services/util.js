@@ -37,3 +37,7 @@ export const authHeaders = (token) => {
     Authorization: `Bearer ${token}`,
   };
 };
+
+export const toCapitalLetter = (item) => {
+  return item.charAt(0).toUpperCase() + item.slice(1);
+};

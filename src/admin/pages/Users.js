@@ -4,6 +4,8 @@ import Pagination from "../components/Footers/Pagination";
 import TableUsers from "../components/Tables/TableUsers";
 import AddUserBtn from "../components/Users/AddUserBtn";
 import AddUser from "../components/Users/AddUser";
+import usersServices from "../../services/users-services";
+import Toasteo from "toasteo";
 
 class Users extends Component {
   constructor(props) {
@@ -12,12 +14,31 @@ class Users extends Component {
       showForm: false,
       createdUser: {},
       email_notif: false,
+
+      users: [],
     };
+  }
+
+  getPagination = async () => {};
+
+  loadUsers = async () => {
+    if (window.Toasteo) window.Toasteo.close();
+    window.Toasteo = new Toasteo();
+    const data = await usersServices.getUsers(this.props.token);
+    if (data.ok) {
+      this.setState({ users: data.users });
+    } else {
+      window.Toasteo.error(data.message);
+    }
+  };
+  componentWillMount() {
+    this.loadUsers();
   }
 
   setForm = (status) => {
     this.setState({ showForm: status });
   };
+
   render() {
     return (
       <div>
@@ -33,7 +54,7 @@ class Users extends Component {
                 )}
               </div>
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <TableUsers />
+                <TableUsers users={this.state.users} user={this.props.user} />
                 <Pagination />
               </div>
             </div>
@@ -45,7 +66,10 @@ class Users extends Component {
             <h1 className="text-xl text-white font-bold text-center mb-5 bg-blue-400">
               Nouvel Utilisateur
             </h1>
-            <AddUser closeForm={() => this.setForm(false)} />
+            <AddUser
+              closeForm={() => this.setForm(false)}
+              loadUsers={this.loadUsers}
+            />
           </div>
         )}
       </div>
@@ -55,6 +79,7 @@ class Users extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    token: state.token,
     user: state.user,
   };
 };

@@ -18,13 +18,12 @@ const addUser = (data) => {
   );
 };
 
-const getUsers = (data) => {
-  const { token } = data;
+const getUsers = (token) => {
   const requestOptions = getRequestOptions("get", {
     ...laravelHeaders(),
     ...authHeaders(token),
   });
-  return handleResponse(USERS_URL, getRequestOptions);
+  return handleResponse(USERS_URL, requestOptions);
 };
 const signUpUser = (data) => {
   // "X-Requested-With": "XMLHttpRequest",

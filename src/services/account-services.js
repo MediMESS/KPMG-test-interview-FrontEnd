@@ -22,7 +22,6 @@ const logoutUser = (token) => {
     headers: { ...laravelHeaders(), ...authHeaders(token) },
   };
 
-  console.log(requestOptions);
   return fetch(`${AUTH_URL}/logout`, requestOptions).then((response) =>
     response.json()
   );

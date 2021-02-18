@@ -25,7 +25,6 @@ const UserDropdown = (props) => {
     window.Toasteo = new Toasteo();
     window.Toasteo.info("Deconnection en cours...");
     accountService.logoutUser(props.token).then((data) => {
-      console.log(data);
       window.Toasteo.close();
       if (data.ok) {
         window.Toasteo.success(data.message);
