@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 import Pagination from "../components/Footers/Pagination";
 import TableUsers from "../components/Tables/TableUsers";
 import AddUserBtn from "../components/Users/AddUserBtn";
@@ -25,10 +25,12 @@ class Users extends Component {
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div className="z-10 h-8">
-                <AddUserBtn
-                  showForm={this.state.showForm}
-                  onClick={this.setForm}
-                />
+                {this.props.user.role === "admin" && (
+                  <AddUserBtn
+                    showForm={this.state.showForm}
+                    onClick={this.setForm}
+                  />
+                )}
               </div>
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <TableUsers />
@@ -37,7 +39,7 @@ class Users extends Component {
             </div>
           </div>
         </div>
-        {this.state.showForm && (
+        {this.props.user.role === "admin" && this.state.showForm && (
           <div className="mt-10">
             {" "}
             <h1 className="text-xl text-white font-bold text-center mb-5 bg-blue-400">
@@ -51,4 +53,10 @@ class Users extends Component {
   }
 }
 
-export default Users;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, null)(Users);

@@ -1,5 +1,6 @@
 import { laravelHeaders, authHeaders } from "./util";
 import { API_URL } from "./config";
+import { getRequestOptions } from "./util";
 
 const AUTH_URL = `${API_URL}/api/auth`;
 
@@ -10,22 +11,19 @@ const loginUser = (data) => {
     body: JSON.stringify(data),
   };
 
-  console.log(requestOptions);
   return fetch(`${AUTH_URL}/login`, requestOptions).then((response) =>
     response.json()
   );
 };
 
-const addUser = (data) => {
-  const { token, ...body } = data;
+const logoutUser = (token) => {
   const requestOptions = {
-    method: "post",
+    method: "get",
     headers: { ...laravelHeaders(), ...authHeaders(token) },
-    body: JSON.stringify(body),
   };
 
   console.log(requestOptions);
-  return fetch(`${AUTH_URL}/addUser`, requestOptions).then((response) =>
+  return fetch(`${AUTH_URL}/logout`, requestOptions).then((response) =>
     response.json()
   );
 };
@@ -33,8 +31,9 @@ const addUser = (data) => {
 const signUpUser = (data) => {
   // "X-Requested-With": "XMLHttpRequest",
 };
+
 const accountService = {
   loginUser,
-  addUser,
+  logoutUser,
 };
 export default accountService;

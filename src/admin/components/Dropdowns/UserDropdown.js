@@ -1,7 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { createPopper } from "@popperjs/core";
+import accountService from "../../../services/account-services";
+import { actionLogout } from "../../../redux/actions";
+import Toasteo from "toasteo";
 
-const UserDropdown = () => {
+const UserDropdown = (props) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -14,6 +18,22 @@ const UserDropdown = () => {
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
+  };
+
+  const logout = () => {
+    if (window.Toasteo) window.Toasteo.close();
+    window.Toasteo = new Toasteo();
+    window.Toasteo.info("Deconnection en cours...");
+    accountService.logoutUser(props.token).then((data) => {
+      console.log(data);
+      window.Toasteo.close();
+      if (data.ok) {
+        window.Toasteo.success(data.message);
+        props.logout();
+      } else {
+        window.Toasteo.error("Erreur, Veuillez réessayer ultérieurement");
+      }
+    });
   };
   return (
     <>
@@ -71,18 +91,30 @@ const UserDropdown = () => {
           Something else here
         </a>
         <div className="h-0 my-2 border border-solid border-gray-200" />
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
-          }
-          onClick={(e) => e.preventDefault()}
+        <button
+          className="w-full text-blue-500 bg-transparent text-left whitespace-nowrap text-sm px-4 font-bold py-3 rounded outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+          type="button"
+          onClick={logout}
         >
-          Seprated link
-        </a>
+          <i className="fas fa-sign-out-alt"></i> Deconnection
+        </button>
       </div>
     </>
   );
 };
 
-export default UserDropdown;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(actionLogout());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDropdown);

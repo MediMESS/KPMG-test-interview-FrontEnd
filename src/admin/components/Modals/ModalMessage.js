@@ -9,7 +9,7 @@ const ModalMessage = (props) => {
   };
 
   const copyCliboard = () => {
-    window.Toasteo.close();
+    if (window.Toasteo) window.Toasteo.close();
     const contentCopy = `Email: ${props.user.email}    Mot de passe: ${props.user.password}`;
     navigator.clipboard.writeText(contentCopy);
     window.Toasteo = new Toasteo({ duration: 1000 });

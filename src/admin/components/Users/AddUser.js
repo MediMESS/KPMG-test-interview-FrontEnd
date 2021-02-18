@@ -3,8 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import Toasteo from "toasteo";
-import accountService from "./../../../services/account-services";
-import Modal from "../../components/Modals/ModalMessage";
+import usersServices from "./../../../services/users-services";
 import ModalMessage from "../../components/Modals/ModalMessage";
 
 const LoginSchema = Yup.object().shape({
@@ -44,14 +43,14 @@ class AddUser extends Component {
     window.Toasteo.info("Ajout en cours ...");
     values.token = this.props.token;
     console.log(values);
-    accountService
+    usersServices
       .addUser(values)
       .then((data) => {
         window.Toasteo.close();
         console.log(data);
-        if (data.message === "unauthorized") {
+        if (data.error) {
           window.Toasteo.duration = 1000;
-          window.Toasteo.error("Erreur, veuillez vérifier vos informations");
+          window.Toasteo.error(data.message);
         } else {
           window.Toasteo.success("Nouvel Utilisateur ajouté");
           if (!values.notif_email) {

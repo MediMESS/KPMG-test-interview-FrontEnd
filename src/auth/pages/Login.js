@@ -28,7 +28,6 @@ class Login extends Component {
     accountService
       .loginUser(values)
       .then((data) => {
-        console.log(data);
         window.Toasteo.close();
         if (data.ok) {
           window.Toasteo.success("Connection réussi");

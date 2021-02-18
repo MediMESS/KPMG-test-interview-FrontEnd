@@ -17,6 +17,21 @@ export const laravelHeaders = () => {
   };
 };
 
+export const getRequestOptions = (method, headers, body = undefined) => {
+  const requestOptions = {
+    method,
+    headers: { ...headers },
+  };
+  if (body) requestOptions.body = body;
+  return requestOptions;
+};
+
+export const handleResponse = (url, requestOptions) => {
+  return fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
 export const authHeaders = (token) => {
   return {
     Authorization: `Bearer ${token}`,

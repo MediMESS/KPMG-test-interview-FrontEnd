@@ -19,6 +19,14 @@ const Reducer = (state = initialState, action) => {
         token: action.token,
         is_connecte: true,
       };
+
+    case actions.LOGOUT:
+      return {
+        ...state,
+        user: null,
+        token: null,
+        is_connecte: false,
+      };
     default:
       return state;
   }
