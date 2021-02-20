@@ -34,7 +34,7 @@ class AddUser extends Component {
   closeModal = () => {
     this.props.closeForm();
     this.setState({ openModal: false });
-    this.props.loadUsers();
+    this.props.loadUsersPaginated();
   };
 
   confirmer = () => {};

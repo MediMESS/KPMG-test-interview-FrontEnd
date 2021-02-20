@@ -14,25 +14,82 @@ class Users extends Component {
       showForm: false,
       createdUser: {},
       email_notif: false,
-
+      pagination_limit: 5,
+      pagination: {
+        total_pages: 1,
+        current_page: 1,
+        from: 1,
+        to: 5,
+        total: 0,
+      },
       users: [],
     };
   }
 
+  setPaginationLimit = (limit) => {
+    this.setState({ pagination_limit: limit });
+    this.loadUsersPaginated(limit);
+  };
+
   getPagination = async () => {};
 
-  loadUsers = async () => {
+  loadUsersPaginated = async () => {
     if (window.Toasteo) window.Toasteo.close();
     window.Toasteo = new Toasteo();
-    const data = await usersServices.getUsers(this.props.token);
+    const data = await usersServices.getUsers({
+      token: this.props.token,
+      pagination_limit: this.state.pagination_limit,
+    });
+
+    console.log(data);
     if (data.ok) {
-      this.setState({ users: data.users });
+      const { users_pagination } = data;
+      this.setState((prevState) => ({
+        ...prevState,
+        users: users_pagination.data,
+        pagination: {
+          ...prevState.pagination,
+          total_pages: users_pagination.last_page,
+          total: users_pagination.total,
+          from: users_pagination.from,
+          to: users_pagination.to,
+        },
+      }));
     } else {
       window.Toasteo.error(data.message);
     }
   };
+
+  loadCurrentPaginationUsers = async (page) => {
+    if (window.Toasteo) window.Toasteo.close();
+    window.Toasteo = new Toasteo();
+    console.log(page);
+    const data = await usersServices.getUsersPagination({
+      token: this.props.token,
+      page,
+    });
+    console.log(data);
+    if (data.ok) {
+      const { users_pagination } = data;
+      this.setState((prevState) => ({
+        ...prevState,
+        users: users_pagination.data,
+        pagination: {
+          ...prevState.pagination,
+          total_pages: users_pagination.last_page,
+          total: users_pagination.total,
+          from: users_pagination.from,
+          to: users_pagination.to,
+        },
+      }));
+    } else {
+      window.Toasteo.error(data.message);
+    }
+  };
+
   componentWillMount() {
-    this.loadUsers();
+    console.log("WILL MOUNT");
+    this.loadUsersPaginated();
   }
 
   setForm = (status) => {
@@ -55,7 +112,11 @@ class Users extends Component {
               </div>
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <TableUsers users={this.state.users} user={this.props.user} />
-                <Pagination />
+                <Pagination
+                  pagination={this.state.pagination}
+                  setPaginationLimit={this.setPaginationLimit}
+                  loadCurrentPaginationUsers={this.loadCurrentPaginationUsers}
+                />
               </div>
             </div>
           </div>
@@ -68,7 +129,7 @@ class Users extends Component {
             </h1>
             <AddUser
               closeForm={() => this.setForm(false)}
-              loadUsers={this.loadUsers}
+              loadUsersPaginated={this.loadUsersPaginated}
             />
           </div>
         )}

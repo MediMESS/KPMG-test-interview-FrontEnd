@@ -5,7 +5,6 @@ const ItemUser = (props) => {
   const { user } = props;
   //   console.log(new Intl.DateTimeFormat("en-US").format(user.created_at));
 
-  console.log(user);
   return (
     <tr className="hover:bg-blue-100">
       <td className="px-6 py-4 whitespace-nowrap">

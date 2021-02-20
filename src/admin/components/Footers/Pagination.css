@@ -1,0 +1,12 @@
+.users_page:hover,
+.users_pages_actions:hover {
+  background-color: rgba(237, 242, 247, 0.5) !important;
+}
+.users_pages_actions_not_allowed {
+  cursor: not-allowed !important;
+}
+.no-focus-bor-out:focus,
+.no-focus-bor-out:active {
+  outline: none !important;
+  border: none !important;
+}
