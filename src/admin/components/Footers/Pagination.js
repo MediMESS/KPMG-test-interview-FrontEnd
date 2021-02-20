@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import "./Pagination.css";
 
 const Pagination = (props) => {
-  // total_users={this.state.total_users}
-  //                 pagination_total_pages={this.state.pagination_total_pages}
-  // const [current_page, setCurrentPage];
   const { pagination } = props;
   let pages = [];
   if (pagination.total_pages > 5) {
@@ -123,10 +120,18 @@ const Pagination = (props) => {
                 return (
                   <button
                     key={i}
-                    className="users_page focus:outline-none relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    onClick={() => {
-                      props.loadCurrentPaginationUsers(p);
-                    }}
+                    className={`focus:outline-none relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 ${
+                      p === pagination.current_page
+                        ? "bg-blue-200"
+                        : "users_page"
+                    }`}
+                    onClick={
+                      pagination.current_page === p
+                        ? () => {}
+                        : () => {
+                            props.loadCurrentPaginationUsers(p);
+                          }
+                    }
                   >
                     {p}
                   </button>

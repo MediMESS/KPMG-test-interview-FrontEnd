@@ -34,8 +34,10 @@ const getUsersPagination = (options) => {
     ...laravelHeaders(),
     ...authHeaders(options.token),
   });
-  console.log(options.page);
-  return handleResponse(`${USERS_URL}?page=${options.page}`, requestOptions);
+  return handleResponse(
+    `${USERS_URL}?pagination_limit=${options.pagination_limit}&page=${options.page}`,
+    requestOptions
+  );
 };
 const signUpUser = (data) => {
   // "X-Requested-With": "XMLHttpRequest",

@@ -1,5 +1,4 @@
 require("dotenv").config();
-console.log(process.env);
 module.exports = {
   API_URL:
     process.env.NODE_ENV === "production"

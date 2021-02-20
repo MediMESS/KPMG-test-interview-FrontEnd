@@ -33,15 +33,16 @@ class Users extends Component {
 
   getPagination = async () => {};
 
-  loadUsersPaginated = async () => {
+  loadUsersPaginated = async (pagination_limit = undefined) => {
     if (window.Toasteo) window.Toasteo.close();
     window.Toasteo = new Toasteo();
     const data = await usersServices.getUsers({
       token: this.props.token,
-      pagination_limit: this.state.pagination_limit,
+      pagination_limit: pagination_limit
+        ? pagination_limit
+        : this.state.pagination_limit,
     });
 
-    console.log(data);
     if (data.ok) {
       const { users_pagination } = data;
       this.setState((prevState) => ({
@@ -49,6 +50,7 @@ class Users extends Component {
         users: users_pagination.data,
         pagination: {
           ...prevState.pagination,
+          current_page: 1,
           total_pages: users_pagination.last_page,
           total: users_pagination.total,
           from: users_pagination.from,
@@ -63,12 +65,11 @@ class Users extends Component {
   loadCurrentPaginationUsers = async (page) => {
     if (window.Toasteo) window.Toasteo.close();
     window.Toasteo = new Toasteo();
-    console.log(page);
     const data = await usersServices.getUsersPagination({
       token: this.props.token,
+      pagination_limit: this.state.pagination_limit,
       page,
     });
-    console.log(data);
     if (data.ok) {
       const { users_pagination } = data;
       this.setState((prevState) => ({
@@ -76,6 +77,7 @@ class Users extends Component {
         users: users_pagination.data,
         pagination: {
           ...prevState.pagination,
+          current_page: users_pagination.current_page,
           total_pages: users_pagination.last_page,
           total: users_pagination.total,
           from: users_pagination.from,
@@ -88,7 +90,6 @@ class Users extends Component {
   };
 
   componentWillMount() {
-    console.log("WILL MOUNT");
     this.loadUsersPaginated();
   }
 
