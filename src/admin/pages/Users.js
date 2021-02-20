@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Pagination from "../components/Footers/Pagination";
-import TableUsers from "../components/Tables/TableUsers";
+import TableUsers from "../components/Tables/UsersTable";
 import AddUserBtn from "../components/Users/AddUserBtn";
 import AddUser from "../components/Users/AddUser";
 import usersServices from "../../services/users-services";

@@ -74,7 +74,7 @@ export default function Sidebar(props) {
   ];
   return (
     <>
-      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-no-wrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-20 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-no-wrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
@@ -85,23 +85,23 @@ export default function Sidebar(props) {
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
-          <div className="flex justify-between items-center">
+          <div className="flex items-center">
             <div
               className="cursor-pointer"
               onClick={() => setLocation("dashboard")}
             >
               <Link
-                className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
+                className="block md:hidden text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                 to="/"
               >
                 Notus React
               </Link>
             </div>
             <div
-              className="hidden md:block cursor-pointer text-left text-blue-500  md:pb-2  mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-              onClick={() => props.minimize(true)}
+              className={`hidden md:block cursor-pointer text-left text-blue-500  md:pb-2  mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0 `}
+              onClick={() => props.minimize(false)}
             >
-              <i className="fas fa-chevron-left fa-2x"></i>
+              <i className="fas fa-chevron-right fa-2x"></i>
             </div>
           </div>
           {/* User */}
@@ -128,7 +128,7 @@ export default function Sidebar(props) {
                   onClick={() => setLocation("dashboard")}
                 >
                   <Link
-                    className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
+                    className="block md:hidden text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                     to="/"
                   >
                     Notus React
@@ -158,12 +158,7 @@ export default function Sidebar(props) {
 
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Layout Pages
-            </h6>
             {/* Navigation */}
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               {nav_links.map((link, i) => {
                 return (
@@ -184,12 +179,11 @@ export default function Sidebar(props) {
                       <i
                         className={
                           `fas fa-${link.icon} mr-2 text-sm ` +
-                          (location == link.link
+                          (location == link.name
                             ? "opacity-75"
                             : "text-gray-400")
                         }
                       ></i>{" "}
-                      {link.name}
                     </Link>
                   </li>
                 );
@@ -199,9 +193,6 @@ export default function Sidebar(props) {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Documentation
-            </h6>
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               {static_links.map((static_link, i) => (
@@ -214,7 +205,6 @@ export default function Sidebar(props) {
                     <i
                       className={`${static_link.icon}  mr-2 text-gray-400 text-base`}
                     ></i>
-                    {static_link.name}
                   </a>
                 </li>
               ))}

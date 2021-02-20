@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ItemUser from "./ItemUser";
+import ItemUser from "./UserItem";
 
 class TableUsers extends Component {
   constructor(props) {
