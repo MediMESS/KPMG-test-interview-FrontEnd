@@ -1,5 +1,5 @@
 import React from "react";
-import TableDropdown from "../Dropdowns/TableDropdown.js";
+import TableDropdown from "../../../components/Dropdowns/TableDropdown";
 
 const CustomerItem = (props) => {
   return (

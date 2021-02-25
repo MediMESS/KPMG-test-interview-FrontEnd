@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Produit from "./Produit";
 import Login from "./Login";
-import "tailwindcss/tailwind.css";
+// import "tailwindcss/tailwind.css";
 import "./LandingPage.css";
 
 class LandingPage extends Component {

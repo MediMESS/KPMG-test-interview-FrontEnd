@@ -2,7 +2,7 @@ import React from "react";
 
 // components
 
-import CustomersTable from "./../components/Tables/CustomersTable";
+import CustomersTable from "./components/CustomersTable";
 
 export default function Dashboard() {
   return (

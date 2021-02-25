@@ -11,12 +11,12 @@ import FooterAdmin from "./components/Footers/FooterAdmin";
 
 // views
 
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Maps from "./pages/Maps";
 import Settings from "./pages/Settings";
 import Tables from "./pages/Tables";
 import Users from "./pages/Users";
-import "../assets/styles/tailwind.css";
+// import "../assets/styles/tailwind.css";
 
 class Admin extends Component {
   constructor(props) {

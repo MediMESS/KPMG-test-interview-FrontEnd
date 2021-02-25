@@ -237,8 +237,8 @@ class AddUser extends Component {
                               className={`cursor-pointer px-3 py-3 placeholder-gray-400 border-gray-300 text-gray-700 relative bg-white bg-white rounded text-sm border border-gray-800
                                 outline-none focus:outline-none focus:shadow-outline w-full pr-10`}
                             >
-                              <option>User</option>
-                              <option>Admin</option>
+                              <option value="user">User</option>
+                              <option value="admin">Admin</option>
                             </Field>
                           </div>
                         </div>
