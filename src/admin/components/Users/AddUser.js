@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import Toasteo from "toasteo";
-import usersServices from "./../../../services/users-services";
+import userServices from "../../../services/user-services";
 import ModalMessage from "../../components/Modals/ModalMessage";
 
 const LoginSchema = Yup.object().shape({
@@ -44,7 +44,7 @@ class AddUser extends Component {
     window.Toasteo.info("Ajout en cours ...");
     values.token = this.props.token;
     console.log(values);
-    usersServices
+    userServices
       .addUser(values)
       .then((data) => {
         window.Toasteo.close();

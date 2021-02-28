@@ -4,7 +4,7 @@ import Pagination from "../components/Footers/Pagination";
 import TableUsers from "../components/Tables/UsersTable";
 import AddUserBtn from "../components/Users/AddUserBtn";
 import AddUser from "../components/Users/AddUser";
-import usersServices from "../../services/users-services";
+import usersServices from "../../services/user-services";
 import Toasteo from "toasteo";
 
 class Users extends Component {

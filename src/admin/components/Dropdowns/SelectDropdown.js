@@ -17,7 +17,7 @@ const SelectDropdown = (props) => {
     setDropdownPopoverShow(false);
   };
   return (
-    <div className="w-full relative my-4">
+    <div className="relative">
       <button
         className={`
           ${props.selectClassName} justify-between flex items-center`}
@@ -27,8 +27,8 @@ const SelectDropdown = (props) => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        {toCapitalLetter(props.header)}
-        <i className="fas fa-arrow-down text-gray-500"></i>
+        {props.toCapitalLetter ? toCapitalLetter(props.header) : props.header}
+        {props.icon && <i className="fas fa-arrow-down text-gray-500"></i>}
       </button>
       <div
         ref={popoverDropdownRef}
@@ -48,7 +48,7 @@ const SelectDropdown = (props) => {
               props.setHeader(h);
             }}
           >
-            {toCapitalLetter(h)}
+            {props.toCapitalLetter ? toCapitalLetter(h) : h}
           </p>
         ))}
       </div>

@@ -96,10 +96,12 @@ class AddSearchFilter extends Component {
                       </div>
                     </div>
                     <SelectDropdown
-                      selectClassName="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 text-left rounded-t-md focus:outline-none  focus:z-10 sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                      selectClassName="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 text-left rounded-t-md focus:outline-none  focus:z-10 sm:text-sm focus:ring-indigo-500 focus:border-indigo-500  my-4"
                       headers={this.props.headers}
                       header={this.state.header}
                       setHeader={this.setHeader}
+                      toCapitalLetter={true}
+                      icon={true}
                     />
                     <div className=" relative sm:w-full flex flex-wrap items-stretch mt-2">
                       <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">

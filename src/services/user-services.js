@@ -39,12 +39,13 @@ const getUsersPagination = (options) => {
     requestOptions
   );
 };
+
 const signUpUser = (data) => {
   // "X-Requested-With": "XMLHttpRequest",
 };
-const usersServices = {
+const userServices = {
   addUser,
   getUsers,
   getUsersPagination,
 };
-export default usersServices;
+export default userServices;

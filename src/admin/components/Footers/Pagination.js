@@ -4,14 +4,23 @@ import "./Pagination.css";
 const Pagination = (props) => {
   const { pagination } = props;
   let pages = [];
-  if (pagination.total_pages > 5) {
+  if (
+    pagination.total_pages > 5 &&
+    pagination.total_pages - pagination.current_page > 4
+  ) {
     pages.push(pagination.current_page);
     pages.push(pagination.current_page + 1);
     pages.push(-1);
     pages.push(pagination.total_pages - 1);
     pages.push(pagination.total_pages);
   } else {
-    for (let i = 1; i <= pagination.total_pages; i++) {
+    let initI;
+    if (pagination.total_pages < 5) {
+      initI = 1;
+    } else {
+      initI = pagination.total_pages - 4;
+    }
+    for (let i = initI; i <= pagination.total_pages; i++) {
       pages.push(i);
     }
   }
@@ -33,46 +42,48 @@ const Pagination = (props) => {
         </div>
 
         {/*  Dropdown */}
-        <div className="no-focus-bor-out relative w-16 text-left">
-          <select
-            name=""
-            id="limit_page"
-            className="no-focus-bor-out inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-            placeholder="options"
-            onChange={changePageLimit}
-          >
-            <option
-              style={{
-                display: "block",
-                padding: "1rem .5rem",
-                color: "rgba(55, 65, 81, .8)",
-              }}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        {props.setPaginationLimit && (
+          <div className="no-focus-bor-out relative w-16 text-left">
+            <select
+              name=""
+              id="limit_page"
+              className="no-focus-bor-out inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+              placeholder="options"
+              onChange={changePageLimit}
             >
-              5
-            </option>
-            <option
-              style={{
-                display: "block",
-                padding: "1rem .5rem",
-                color: "rgba(55, 65, 81, .8)",
-              }}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              10
-            </option>
-            <option
-              style={{
-                display: "block",
-                padding: "1rem .5rem",
-                color: "rgba(55, 65, 81, .8)",
-              }}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-            >
-              25
-            </option>
-          </select>
-        </div>
+              <option
+                style={{
+                  display: "block",
+                  padding: "1rem .5rem",
+                  color: "rgba(55, 65, 81, .8)",
+                }}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              >
+                5
+              </option>
+              <option
+                style={{
+                  display: "block",
+                  padding: "1rem .5rem",
+                  color: "rgba(55, 65, 81, .8)",
+                }}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              >
+                10
+              </option>
+              <option
+                style={{
+                  display: "block",
+                  padding: "1rem .5rem",
+                  color: "rgba(55, 65, 81, .8)",
+                }}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              >
+                25
+              </option>
+            </select>
+          </div>
+        )}
 
         <div>
           <nav
